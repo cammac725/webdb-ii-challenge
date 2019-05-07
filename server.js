@@ -1,15 +1,14 @@
 const express = require('express');
-const morgan = require('morgan');
-const helmet = require('helmet');
+const configMiddleware = require('./config/middleware')
 
 const zoosRouter = require('./zoos/zoos-router');
+const bearsRouter = require('./bears/bears-router');
 
 const server = express();
 
-server.use(morgan('dev'));
-server.use(helmet());
-server.use(express.json());
+configMiddleware(server);
 
 server.use('/api/zoos', zoosRouter);
+server.use('/api/bears', bearsRouter);
 
 module.exports = server;
